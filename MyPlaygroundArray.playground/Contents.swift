@@ -50,3 +50,80 @@ let set = Set(["aardvark", "astronaut", "azalea"])
 
 //If you need a collection of values that can contain duplicates, or the order of your items matters, you should use an array:
 let pythons = ["Eric", "Graham", "John", "Michael", "Terry", "Terry"]
+
+
+//Dictionaries
+
+//Dictionaries are collections of values just like arrays, but rather than storing things with an integer position you can access them using anything you want.
+//
+//The most common way of storing dictionary data is using strings. For example, we could create a dictionary that stores the height of singers using their name:
+
+let heights = [
+    "Taylor Swift": 1.78,
+    "Ed Sheeran": 1.73
+]
+
+heights["Taylor Swift"]
+heights["Taylor"]//return nil
+
+//If you try to read a value from a dictionary using a key that doesn’t exist, Swift will send you back nil – nothing at all. While this might be what you want, there’s an alternative: we can provide the dictionary with a default value to use if we request a missing key.
+
+heights["Taylor", default: 0]
+
+//Collections
+
+//Arrays, sets, and dictionaries are called collections, because they collect values together in one place.
+//
+//If you want to create an empty collection just write its type followed by opening and closing parentheses. For example, we can create an empty dictionary with strings for keys and values like this:
+
+var teams = [String: String]()
+teams["king"] = "ohohohoh"
+teams
+
+var arr = [String]()
+
+var words = Set<String>()
+var numbers = Set<Int>()
+
+var scores = Dictionary<String, Int>()
+var results = Array<Int>()
+
+
+//Enums
+
+//Enumerations – usually called just enums – are a way of defining groups of related values in a way that makes them easier to use.
+
+//For example, if you wanted to write some code to represent the success or failure of some work you were doing, you could represent that as strings:
+
+enum Result {
+    case success
+    case failure
+}
+
+let res = Result.failure
+
+//Enum associated values
+
+
+enum Activity {
+    case talking(about:String)
+    case counting(to:Int)
+}
+
+let some = Activity.counting(to: 10)
+let talking = Activity.talking(about: "football")
+
+//Enum raw values
+
+enum planets: String {
+    case sun = "str"
+    case moon
+    case eb3
+    case mars
+}
+
+planets.eb3.rawValue
+let earth = planets.init(rawValue: "mars")
+
+
+
