@@ -126,4 +126,3 @@ planets.eb3.rawValue
 let earth = planets.init(rawValue: "mars")
 
 
-
