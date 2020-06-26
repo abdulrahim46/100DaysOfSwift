@@ -88,4 +88,14 @@ print(string.uppercased())
 print(string.sorted())
 
 
+//Arrays properties
 
+//Arrays are also structs, which means they too have their own methods and properties we can use to query and manipulate the array.
+
+var toys = ["woody","buzz"]
+toys.count
+toys.capacity
+toys.append("hello")
+toys.append(contentsOf: ["abc","def"])
+toys.sorted()
+toys.remove(at: 1)
