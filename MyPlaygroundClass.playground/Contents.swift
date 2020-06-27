@@ -106,3 +106,34 @@ print(taylor.name)
 //Classes can have a deinitializer, which is code that gets run when an instance of the class is destroyed.
 //Classes don’t enforce constants as strongly as structs – if a property is declared as a variable, it can be changed regardless of how the class instance was created.
 
+
+//Classes do not come with synthesized memberwise initializers.
+//One class can be built upon (“inherit from”) another class, gaining its properties and methods.
+//Copies of structs are always unique, whereas copies of classes actually point to the same shared data.
+//Classes have deinitializers, which are methods that are called when an instance of the class is destroyed, but structs do not.
+//Variable properties in constant classes can be modified freely, but variable properties in constant structs cannot.
+
+
+// Structs are value types, which means they hold simple values such as the number 5 or the string “hello”.
+//classes are reference types, which means they refer to a value somewhere else.
+
+struct Calculator {
+    var currentTotal = 0
+}
+var baseModel = Calculator()
+var casio = baseModel
+var texas = baseModel
+casio.currentTotal = 556
+texas.currentTotal = 384
+print(casio.currentTotal)
+print(texas.currentTotal)
+
+class Hairdresser {
+    var clients = [String]()
+}
+var tim = Hairdresser()
+tim.clients.append("Jess")
+var dave = tim
+dave.clients.append("Sam")
+print(tim.clients.count)
+print(dave.clients.count)
