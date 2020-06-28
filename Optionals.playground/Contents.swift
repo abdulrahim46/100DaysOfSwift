@@ -91,8 +91,91 @@ let n = userName(for: 11) ?? "Anonymous"
 
 //Optional chaining
 
+//if you want to access something like a.b.c and b is optional, you can write a question mark after it to enable optional chaining: a.b?.c.
+//When that code is run, Swift will check whether b has a value, and if it’s nil the rest of the line will be ignored – Swift will return nil immediately. But if it has a value, it will be unwrapped and execution will continue.
+
+let names = ["John", "Paul", "George", "Ringo"]
+names.first?.uppercased()
+
+//That question mark is optional chaining – if first returns nil then Swift won’t try to uppercase it, and will set beatle to nil immediately.
+
+//optional try
+
+enum PasswordError: Error {
+    case obvious
+}
+
+func checkPassword(_ password: String) throws -> Bool {
+    if password == "password" {
+        throw PasswordError.obvious
+    }
+
+    return true
+}
+
+do {
+    try checkPassword("password")
+    print("That password is good!")
+} catch {
+    print("You can't use that password.")
+}
+
+if let pass = try? checkPassword("passwordd") {
+    print("result was \(pass)")
+} else {
+    print("nope! nope!! nope!!!")
+}
 
 
+//Failable initializers
+
+//This is a failable initializer: an initializer that might work or might not. You can write these in your own structs and classes by using init?() rather than init(), and return nil if something goes wrong. The return value will then be an optional of your type, for you to unwrap however you want.
+
+struct Perdon {
+    var id: String
+    
+    init?(id : String) {
+        if id.count == 9 {
+            self.id = id
+        } else {
+            return nil
+        }
+    }
+}
+
+let p = Perdon(id: "ioopiop")
+p
+
+//Typecasting
+//If we want to loop over the pets array and ask all the dogs to bark, we need to perform a typecast: Swift will check to see whether each pet is a Dog object, and if it is we can then call makeNoise().
+
+//This uses a new keyword called as?, which returns an optional: it will be nil if the typecast failed, or a converted type otherwise.
+
+class Animal {}
+class Fish: Animal{}
+class Dog: Animal {
+    func woof() {
+        print("woof woof!")
+    }
+}
+
+let pets = [Dog(), Fish(), Dog(), Fish()]
+
+for pet in pets {
+    if let dog = pet as? Dog {
+        dog.woof()
+    }
+}
 
 
+//
+//Optionals let us represent the absence of a value in a clear and unambiguous way.
+//Swift won’t let us use optionals without unwrapping them, either using if let or using guard let.
+//You can force unwrap optionals with an exclamation mark, but if you try to force unwrap nil your code will crash.
+//Implicitly unwrapped optionals don’t have the safety checks of regular optionals.
+//You can use nil coalescing to unwrap an optional and provide a default value if there was nothing inside.
+//Optional chaining lets us write code to manipulate an optional, but if the optional turns out to be empty the code is ignored.
+//You can use try? to convert a throwing function into an optional return value, or try! to crash if an error is thrown.
+//If you need your initializer to fail when it’s given bad input, use init?() to make a failable initializer.
+//You can use typecasting to convert one type of object to another.
 
