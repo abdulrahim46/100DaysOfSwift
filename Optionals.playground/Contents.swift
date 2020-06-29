@@ -179,3 +179,24 @@ for pet in pets {
 //If you need your initializer to fail when it’s given bad input, use init?() to make a failable initializer.
 //You can use typecasting to convert one type of object to another.
 
+//
+//    It lets us focus on the “happy path” – the behavior of our function when everything has gone to plan, which is to print the meaning of life.
+//    guard requires that we exit the current scope when it’s used, which in this case means we must return from the function if it fails. This is not optional: Swift won’t compile our code without the return.
+//
+//It’s common to see guard used one or more times at the start of methods, because it’s used to verify conditions are correct up front. This makes our code easier to read than if we tried to check a condition then run some code, then check another condition and run some different code.
+//
+//So, use if let if you just want to unwrap some optionals, but prefer guard let if you’re specifically checking that conditions are correct before continuing.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
