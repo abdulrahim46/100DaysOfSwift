@@ -77,3 +77,29 @@ print(taylorCopy)
 //    If you want to avoid shared state where one copy can't affect all the others, you're looking for structs. You can pass them into functions or store them in arrays, modify them in there, and they won't change wherever else they are referenced.
 //
 //If I were to summarize this key difference between structs and classes, I'd say this: classes offer more flexibility, whereas structs offer more safety. As a basic rule, you should always use structs until you have a specific reason to use classes.
+
+
+struct Person1 {
+    var clothes: String {
+        willSet {
+            updateUI(msg: "I'm going to \(clothes) from \(newValue)")
+        }
+        didSet {
+            updateUI(msg: "I'm here bobobo \(oldValue) to \(clothes)")
+        }
+    }
+}
+
+func updateUI(msg: String) {
+    print(msg)
+}
+
+var ta = Person1(clothes: "iceland")
+ta.clothes = "mount everest"
+
+
+
+//Public: this means everyone can read and write the property.
+//Internal: this means only your Swift code can read and write the property. If you ship your code as a framework for others to use, they won’t be able to read the property.
+//File Private: this means that only Swift code in the same file as the type can read and write the property.
+//Private: this is the most restrictive option, and means the property is available only inside methods that belong to the type, or its extensions.
