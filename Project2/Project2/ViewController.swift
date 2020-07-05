@@ -37,20 +37,14 @@ class ViewController: UIViewController {
         button2.layer.borderColor = UIColor.lightGray.cgColor
         button3.layer.borderColor = UIColor.lightGray.cgColor
         
-        if totalQuestions == 10 {
-            let ac = UIAlertController(title: title, message: "Your final Score is \(score)", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "Play Again", style: .default, handler: askQuestions))
-            present(ac, animated: true)
-        } else {
-            askQuestions()
-        }
+        askQuestions()
         
     }
     
     @IBAction func buttonAction(_ sender: UIButton) {
         var title: String
-        var rightAnswer: String
-        rightAnswer = countries[correctAnswer]
+        var wrongAnswer: String
+        wrongAnswer = countries[sender.tag]
         if sender.tag == correctAnswer {
             title = "Correct"
             score += 1
@@ -60,7 +54,7 @@ class ViewController: UIViewController {
         } else {
             title = "Wrong"
             score -= 1
-            let bc = UIAlertController(title: title, message: "Right answer is \(rightAnswer)", preferredStyle: .alert)
+            let bc = UIAlertController(title: title, message: "That's the flag of \(wrongAnswer). Your Score is \(score)", preferredStyle: .alert)
             bc.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestions))
             present(bc, animated: true)
         }
@@ -70,6 +64,13 @@ class ViewController: UIViewController {
     
     func askQuestions(action: UIAlertAction! = nil) {
         totalQuestions += 1
+        
+        if totalQuestions == 10 {
+            let ac = UIAlertController(title: "Thanks for Playing!", message: "Your final Score is \(score)", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Play Again", style: .default, handler: askQuestions))
+            present(ac, animated: true)
+        }
+        
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
         button1.setImage(UIImage(named: countries[0]), for: .normal)
@@ -77,6 +78,12 @@ class ViewController: UIViewController {
         button3.setImage(UIImage(named: countries[2]), for: .normal)
         
         title = countries[correctAnswer].uppercased()
+        if let navigationBar = self.navigationController?.navigationBar {
+           let firstFrame = CGRect(x: 0, y: 0, width: navigationBar.frame.width/2, height: navigationBar.frame.height)
+           var firstLabel = UILabel(frame: firstFrame)
+           firstLabel.text = "Score is "+String(score)
+           navigationBar.addSubview(firstLabel)
+        }
     }
 
 
