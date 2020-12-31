@@ -21,4 +21,4 @@ class Solution {
   }
 }
 
-Solution.removeDuplicates([1,1,2])
+Solution.removeDuplicates([1,1,2,3,4,5,5])
